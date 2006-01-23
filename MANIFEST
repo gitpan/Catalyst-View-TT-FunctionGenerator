@@ -1,0 +1,11 @@
+Build.PL
+lib/Catalyst/View/TT/FunctionGenerator.pm
+MANIFEST			This list of files
+t/01use.t
+t/02pod.t
+t/03podcoverage.t
+t/basic.t
+META.yml
+Makefile.PL
+README
+SIGNATURE    Added here by Module::Build
