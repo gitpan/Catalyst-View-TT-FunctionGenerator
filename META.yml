@@ -1,15 +1,13 @@
----
-name: Catalyst-View-TT-FunctionGenerator
-version: 0.01
-author: ~
-abstract: Generate functions from ... to be used from a TT view
-license: perl
-requires:
-  Catalyst: 5.61
-  Catalyst::View::TT: 0.22
-  perl: 5.8.1
-provides:
-  Catalyst::View::TT::FunctionGenerator:
-    file: lib/Catalyst/View/TT/FunctionGenerator.pm
-    version: 0.01
-generated_by: Module::Build version 0.2611
+--- #YAML:1.0
+name:                Catalyst-View-TT-FunctionGenerator
+version:             0.02
+abstract:            ~
+license:             ~
+generated_by:        ExtUtils::MakeMaker version 6.31
+distribution_type:   module
+requires:     
+    Catalyst:                      5.61
+    Catalyst::View::TT:            0.22
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
+    version: 1.2

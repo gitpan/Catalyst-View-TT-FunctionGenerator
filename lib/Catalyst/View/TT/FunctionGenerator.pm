@@ -11,21 +11,23 @@ use Class::Inspector ();
 use Scalar::Util qw/weaken/;
 use Carp ();
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
+
+__PACKAGE__->mk_accessors(qw/context/);
+
+sub ACCEPT_CONTEXT {
+	my ( $self, $c ) = @_;
+	bless { %$self, context => $c }, ref $self;
+}
 
 sub generate_functions {
     my ( $self, @objects ) = @_;
 
-    my $app = Catalyst::Utils::class2appclass(ref $self || $self);
-    Catalyst::Exception->throw( "The generate_functions method"
-          . " requires that you use the Singleton plugin" )
-      unless $app->can("context");
-
-    my $c = $app->context;
+    my $c = $self->context;
 
     # FIXME
     # need to add per instance view data whose lifetime is linked to $c's lifetime
-    push @{ $c->{_evil_function_generator_data} }, map {
+    push @{ $c->{_evil_function_generator_data}{ref $self} }, map {
         my $meths = ref($_) ? $_ : $c->$_;
 
         if ( ref $meths eq "ARRAY" ) {
@@ -61,7 +63,7 @@ sub template_vars {
             #see above
             map { my $method = $_; $method => sub { $obj->$method(@_) } } @methods;
         }
-        @{ $c->{_evil_function_generator_data} || [] }
+        @{ $c->{_evil_function_generator_data}{ref $self} || [] }
     );
 }
 
